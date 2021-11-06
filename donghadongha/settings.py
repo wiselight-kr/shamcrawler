@@ -77,8 +77,13 @@ WSGI_APPLICATION = 'donghadongha.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cryptodb',
+        'USER': 'cryptodb', #root
+        'PASSWORD': '8lkzNFXl', #1234
+        'HOST': 'ti1.wiselight.kr', #공백으로 냅두면 default localhost
     }
 }
 

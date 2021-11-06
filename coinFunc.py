@@ -68,3 +68,15 @@ def getFDMC(driver):
         return driver.find_element_by_class_name('statsValue').text[1:].replace(',','')
     except:
         return None
+
+def getLastPage():
+    URL = 'https://coinmarketcap.com/'
+    res = requests.get(URL)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    TARGET_SELECTOR = '#__next > div > div.main-content > div.sc-57oli2-0.comDeo.cmc-body-wrapper > div > ' \
+                      'div:nth-child(' \
+                      '1) > ' \
+                      'div.sc-16r8icm-0.sc-4r7b5t-0.gJbsQH > div.sc-4r7b5t-3.bvcQcm > div > ul > li:nth-child(9) > a '
+    data = soup.select(TARGET_SELECTOR)
+    last_page = data[0].get('aria-label').split()[1]
+    return int(last_page)

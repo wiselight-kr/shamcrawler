@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  django:
+    # 컨테이너 명
+    container_name: django_service
+    # django 라는 이름으로 로컬에 이미지를 저장
+    image: django
+    # docker build 옵션
+    build:
+      # docker build 명령어를 실행할 디렉토리 경로
+      context: .
+      # 지정할 Dockerfile 경로
+      dockerfile: ./Dockerfile
+    # 환경 변수 설정
+    environment:
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_HOST=rabbitmq
+    # 현재 디렉토리를 컨테이너 내의 /home/에 mount
+    volumes:
+      - ./:/srv/donghadongha
+    # 작업 폴더 지정
+    working_dir: /srv/donghadongha
+    # 실행할 명령어
+    command: >
+      bash -c "
+      python manage.py migrate
+      && python manage.py runserver"
+    # 호스트 OS와 컨테이너의 포트를 바인딩
+    ports:
+      - "8000:8000"
+    # 호스트 OS에 포트를 공개하지 않고 컨테이너만 포트를 공개 (현재는 주석)
+    expose :
+      - "8000"
+#     컨테이너를 실행하는 종속성을 정의
+    depends_on:
+      - redis
+      - rabbitmq
+    # Redis
+  redis:
+    container_name: redis_service
+    image: redis
+    ports:
+      - "6379:6379"
+
+  # RabbitMQ
+  rabbitmq:
+    container_name: rabbitmq_service
+    image: rabbitmq:3.9.8-management-alpine # 웹 UI management 툴 포함
+    # 환경변수 설정
+    environment:
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+    ports:
+      - "5672:5672" # rabbitMQ default port
+      - "15672:15672" # UI를 위한 port

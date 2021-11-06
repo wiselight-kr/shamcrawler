@@ -20,9 +20,14 @@ from celery.schedules import crontab
 app.config_from_object(celeryconfig)
 
 app.conf.beat_schedule = {
-    'every-15-second': {
+    'marketCapUpdate': {
         'task': 'coin.tasks.updateMarkCap',
-        'schedule': crontab(minute='17', hour='16, 20'),
+        'schedule': crontab(minute='0', hour='1'),
+        'args': ()
+    },
+    'coinUpdate': {
+        'task': 'coin.tasks.updateCoin',
+        'schedule': crontab(minute='0', hour='0', day_of_week='sun'),
         'args': ()
     },
 }
