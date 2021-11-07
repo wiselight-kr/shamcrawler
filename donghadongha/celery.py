@@ -22,12 +22,17 @@ app.config_from_object(celeryconfig)
 app.conf.beat_schedule = {
     'marketCapUpdate': {
         'task': 'coin.tasks.updateMarkCap',
-        'schedule': crontab(minute='0', hour='1'),
+        'schedule': crontab(minute='35', hour='1'),
         'args': ()
     },
     'coinUpdate': {
         'task': 'coin.tasks.updateCoin',
-        'schedule': crontab(minute='0', hour='0', day_of_week='sun'),
+        'schedule': crontab(minute='2', hour='20', day_of_week='sun'),
+        'args': ()
+    },
+    'allUpdate': {
+        'task': 'coin.tasks.allUpdate',
+        'schedule': crontab(minute='8', hour='0', day_of_week='sun'),
         'args': ()
     },
 }

@@ -22,15 +22,16 @@ def updateMarkCap():
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome('./driver/chromedriver', chrome_options=chrome_options)
-
+    driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+    print('나 보여??')  
     for coin in Coin.objects.all():
-        if not coin.marketCap: continue
         time.sleep(1)
+        print(coin.name)
         driver.get(URL+coin.name)
         try:
             data = int(getFDMC(driver))
             if data:
+                print(data)
                 coin.marketCap = data
                 coin.save()
         except:
@@ -38,15 +39,13 @@ def updateMarkCap():
 
 @shared_task
 def updateCoin():
+    print('나들어왔어!!')
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome('./driver/chromedriver', chrome_options=chrome_options)
-    import os
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "donghadongha.settings")
-    import django
-    django.setup()
+    driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+    print('driver set')
     from coin.models import Coin
 
     lastPage = getLastPage()
@@ -83,3 +82,35 @@ def updateCoin():
     for coin in COINS:
         Coin.objects.create(name=coin)
     print(len(COINS))
+
+@shared_task
+def allUpdate():
+    URL = 'https://coinmarketcap.com/currencies/'
+    print(URL)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+    URL = 'https://coinmarketcap.com/currencies/'
+
+    for coin in Coin.objects.all():
+        if coin.symbol:
+            continue
+        print(coin)
+        try:
+            data = getData(driver, URL + coin.name)
+            if data.get('symbol'):
+                coin.symbol = data['symbol']
+            if data.get('marketCap'):
+                coin.marketCap = data['marketCap']
+            if data.get('etherscan'):
+                coin.ethTokenAddress = data['etherscan']
+            if data.get('bscscan'):
+                coin.bscTokenAddress = data['bscscan']
+            if data.get('site'):
+                coin.website = data['site']
+            coin.save()
+        except:
+            print('delete coin', coin)
+            #coin.delete()

@@ -1,0 +1,241 @@
+Watching for file changes with StatReloader
+[2021-11-07 02:09:14,001: WARNING/MainProcess] No hostname was supplied. Reverting to default 'localhost'
+ 
+ -------------- celery@ip-172-31-3-245 v5.1.2 (sun-harmonics)
+--- ***** ----- 
+-- ******* ---- Linux-5.11.0-1020-aws-x86_64-with-glibc2.31 2021-11-07 02:09:14
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         test:0x7fca7d2c5400
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     disabled://
+- *** --- * --- .> concurrency: 2 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . coin.tasks.allUpdate
+  . coin.tasks.updateCoin
+  . coin.tasks.updateMarkCap
+  . donghadongha.celery.debug_task
+
+[2021-11-07 02:09:14,013: INFO/Beat] beat: Starting...
+[2021-11-07 02:09:14,113: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2021-11-07 02:09:14,123: INFO/MainProcess] mingle: searching for neighbors
+[2021-11-07 02:09:14,128: WARNING/MainProcess] No hostname was supplied. Reverting to default 'localhost'
+[2021-11-07 02:09:15,145: INFO/MainProcess] mingle: all alone
+[2021-11-07 02:09:15,158: WARNING/MainProcess] /home/ubuntu/anaconda3/envs/donghadongha/lib/python3.9/site-packages/celery/fixups/django.py:203: UserWarning: Using settings.DEBUG leads to a memory
+            leak, never use this setting in production environments!
+  warnings.warn('''Using settings.DEBUG leads to a memory
+
+[2021-11-07 02:09:15,158: INFO/MainProcess] celery@ip-172-31-3-245 ready.
+[2021-11-07 02:10:00,046: INFO/Beat] Scheduler: Sending due task allUpdate (coin.tasks.allUpdate)
+[2021-11-07 02:10:00,070: INFO/MainProcess] Task coin.tasks.allUpdate[38829a4c-47f4-4c12-9184-48cb9c26c1e9] received
+[2021-11-07 02:10:00,071: WARNING/ForkPoolWorker-3] https://coinmarketcap.com/currencies/
+[2021-11-07 02:10:00,071: WARNING/ForkPoolWorker-3] 
+
+[2021-11-07 02:10:00,796: INFO/ForkPoolWorker-3] Task coin.tasks.allUpdate[38829a4c-47f4-4c12-9184-48cb9c26c1e9] succeeded in 0.7246838519995435s: None
+[07/Nov/2021 02:10:46,038] - Broken pipe from ('162.142.125.57', 32960)
+
+[07/Nov/2021 02:10:47] "GET / HTTP/1.1" 200 10697
+[07/Nov/2021 02:10:47,527] - Broken pipe from ('162.142.125.57', 33482)
+
+[07/Nov/2021 02:10:47] "GET / HTTP/1.1" 200 10697
+/home/ubuntu/donghadongha/donghadongha/celery.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 07, 2021 - 02:08:49
+Django version 3.2.8, using settings 'donghadongha.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[2021-11-07 02:15:45,043: WARNING/MainProcess] No hostname was supplied. Reverting to default 'localhost'
+ 
+ -------------- celery@ip-172-31-3-245 v5.1.2 (sun-harmonics)
+--- ***** ----- 
+-- ******* ---- Linux-5.11.0-1020-aws-x86_64-with-glibc2.31 2021-11-07 02:15:45
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         test:0x7f0ff99cd370
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     disabled://
+- *** --- * --- .> concurrency: 2 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . coin.tasks.allUpdate
+  . coin.tasks.updateCoin
+  . coin.tasks.updateMarkCap
+  . donghadongha.celery.debug_task
+
+[2021-11-07 02:15:45,152: INFO/Beat] beat: Starting...
+[2021-11-07 02:15:45,153: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2021-11-07 02:15:45,165: INFO/MainProcess] mingle: searching for neighbors
+[2021-11-07 02:15:45,171: WARNING/MainProcess] No hostname was supplied. Reverting to default 'localhost'
+[2021-11-07 02:15:46,190: INFO/MainProcess] mingle: all alone
+[2021-11-07 02:15:46,203: WARNING/MainProcess] /home/ubuntu/anaconda3/envs/donghadongha/lib/python3.9/site-packages/celery/fixups/django.py:203: UserWarning: Using settings.DEBUG leads to a memory
+            leak, never use this setting in production environments!
+  warnings.warn('''Using settings.DEBUG leads to a memory
+
+[2021-11-07 02:15:46,204: INFO/MainProcess] celery@ip-172-31-3-245 ready.
+[07/Nov/2021 02:16:22] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[07/Nov/2021 02:16:22] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[07/Nov/2021 02:16:22] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 02:16:22] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+
+Restarting celery worker (/home/ubuntu/anaconda3/envs/donghadongha/bin/celery -A donghadongha worker -B -l INFO)
+[2021-11-07 02:16:50,355: INFO/MainProcess] beat: Shutting down...
+[2021-11-07 02:16:51,241: WARNING/MainProcess] No hostname was supplied. Reverting to default 'localhost'
+ 
+ -------------- celery@ip-172-31-3-245 v5.1.2 (sun-harmonics)
+--- ***** ----- 
+-- ******* ---- Linux-5.11.0-1020-aws-x86_64-with-glibc2.31 2021-11-07 02:16:51
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         test:0x7f394f720220
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     disabled://
+- *** --- * --- .> concurrency: 2 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . coin.tasks.allUpdate
+  . coin.tasks.updateCoin
+  . coin.tasks.updateMarkCap
+  . donghadongha.celery.debug_task
+
+[2021-11-07 02:16:51,252: INFO/Beat] beat: Starting...
+[2021-11-07 02:16:51,363: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2021-11-07 02:16:51,375: INFO/MainProcess] mingle: searching for neighbors
+[2021-11-07 02:16:51,380: WARNING/MainProcess] No hostname was supplied. Reverting to default 'localhost'
+[07/Nov/2021 02:16:52] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[2021-11-07 02:16:52,396: INFO/MainProcess] mingle: all alone
+[2021-11-07 02:16:52,409: WARNING/MainProcess] /home/ubuntu/anaconda3/envs/donghadongha/lib/python3.9/site-packages/celery/fixups/django.py:203: UserWarning: Using settings.DEBUG leads to a memory
+            leak, never use this setting in production environments!
+  warnings.warn('''Using settings.DEBUG leads to a memory
+
+[2021-11-07 02:16:52,410: INFO/MainProcess] celery@ip-172-31-3-245 ready.
+[07/Nov/2021 02:16:52] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[07/Nov/2021 02:16:52] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[07/Nov/2021 02:16:53] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[2021-11-07 04:00:00,070: INFO/Beat] Scheduler: Sending due task celery.backend_cleanup (celery.backend_cleanup)
+[2021-11-07 04:00:00,091: INFO/MainProcess] Task celery.backend_cleanup[6c27cc4a-fc5f-4260-aaea-3c494da6be13] received
+[2021-11-07 04:00:00,092: INFO/ForkPoolWorker-3] Task celery.backend_cleanup[6c27cc4a-fc5f-4260-aaea-3c494da6be13] succeeded in 0.0004329939984017983s: None
+[07/Nov/2021 04:23:49] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[07/Nov/2021 04:23:49] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[07/Nov/2021 04:23:49] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 04:23:49] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[07/Nov/2021 04:47:07] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[07/Nov/2021 04:47:07] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[07/Nov/2021 04:47:07] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[07/Nov/2021 04:47:08] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[07/Nov/2021 04:47:08] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 04:47:08] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[07/Nov/2021 04:47:08] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 04:47:08] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 05:04:39] "GET / HTTP/1.1" 200 10697
+[07/Nov/2021 05:20:06] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[07/Nov/2021 05:20:07] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[07/Nov/2021 05:20:07] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+[07/Nov/2021 05:20:07] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+[07/Nov/2021 05:20:07] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[07/Nov/2021 05:20:07] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+[07/Nov/2021 05:20:07] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+[07/Nov/2021 05:20:07] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+[07/Nov/2021 05:28:19] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[07/Nov/2021 05:28:19] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[07/Nov/2021 14:26:18] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00')
+[07/Nov/2021 14:26:18] "    c                           " 400 -
+[07/Nov/2021 15:28:18] "GET /admin/coin/coin/ HTTP/1.1" 200 21784
+[07/Nov/2021 15:28:18] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[07/Nov/2021 15:28:18] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[07/Nov/2021 15:28:18] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 15:28:19] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[07/Nov/2021 15:28:19] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
