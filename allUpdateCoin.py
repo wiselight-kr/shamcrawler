@@ -1,101 +1,34 @@
 import requests
 from bs4 import BeautifulSoup
-
-import time
-from selenium import webdriver
-from selenium.webdriver.common.action_chains import ActionChains
-
-driver = webdriver.Chrome('./chromedriver')
+import json
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "donghadongha.settings")
 import django
 django.setup()
 from coin.models import Coin
 
-
 URL = 'https://coinmarketcap.com/currencies/'
-
-def getData(driver, url):
-    driver.get(url)
-    data = {}
-    MUSTURL = [('etherscan', 'https://etherscan.io/token/', 'https://etherscan.io/address/'), ('bscscan', 'https://bscscan.com/token/', 'https://bscscan.com/address/')]
-    btns = getHoverDataBtn(driver)
-    for i, btn in enumerate(btns):
-        try:
-            if i==0:
-                if btn.text=='Website':
-                    data['site'] = getHrefUsingHoverByWebElementChild(driver, btn)[0]
-                else:
-                    data['site'] = btn.text
-                doBtnHover(driver, btn)
-                time.sleep(0.2)
-
-            elif btn.text=='Explorers':
-                childs = getHrefUsingHoverByWebElementChild(driver, btn)
-                for child in childs:
-                    if not len(child): continue
-                    for (mUrl, p, q) in MUSTURL:
-                        if mUrl in child:
-                            tmpStr = child.replace(p, '')
-                            tmpStr = tmpStr.replace(q, '')
-                            if not len(tmpStr): continue
-                            data[mUrl] = tmpStr
-        except: continue
-    try:
-        data['symbol'] = getSymbol(driver)
-    except:
-        data['symbol'] = None
-    try:
-        data['marketCap'] = int(getFDMC(driver))
-    except:
-        data['marketCap'] = None
-    return data
-
-def doBtnHover(driver, btn):
-    ActionChains(driver).move_to_element(btn).perform()
-
-def getHrefUsingHoverByWebElementChild(driver, target):
-    doBtnHover(driver, target)
-    return [tar.get_attribute('href') for tar in target.find_elements_by_tag_name('a')]
-
-def getHoverDataBtn(driver):
-    ## TODO set detail
-    content = driver.find_elements_by_xpath('//*[@id="__next"]/div/div/div[2]/div/div[1]/div[2]/div/div[5]/div/div[1]/ul')
-    if not content:
-        content = driver.find_elements_by_xpath('//*[@id="__next"]/div/div/div[2]/div/div[1]/div[3]/div/div[5]/div/div[1]/ul')
-    if not content:
-        content = driver.find_elements_by_xpath('//*[@id="__next"]/div/div/div[2]/div/div[1]/div[2]/div/div[4]/div/div[1]/ul')
-    if not content:
-        content = driver.find_elements_by_xpath('//*[@id="__next"]/div/div/div[2]/div/div[1]/div[3]/div/div[4]/div/div[1]/ul')
-    btns = content[0].find_elements_by_tag_name('li')
-    return btns
-
-def getSymbol(driver):
-    return driver.find_element_by_class_name('nameSymbol').text
-
-def getFDMC(driver):
-    try:
-        return driver.find_element_by_class_name('statsValue').text[1:].replace(',','')
-    except:
-        return None
-
 
 for coin in Coin.objects.all():
     if coin.symbol:
         continue
     print(coin)
     try:
-        data = getData(driver, URL + coin.name)
-        if data.get('symbol'):
-            coin.symbol = data['symbol']
-        if data.get('marketCap'):
-            coin.marketCap = data['marketCap']
-        if data.get('etherscan'):
-            coin.ethTokenAddress = data['etherscan']
-        if data.get('bscscan'):
-            coin.bscTokenAddress = data['bscscan']
-        if data.get('site'):
-            coin.website = data['site']
+        coin_page = requests.get(URL + coin.name)
+        soup = BeautifulSoup(coin_page.content, 'html.parser')
+        data = soup.find('script', id="__NEXT_DATA__", type="application/json")
+        coin_data = json.loads(data.contents[0])
+
+        coin.symbol = coin_data['props']['initialProps']['pageProps']['info']['symbol']
+        coin.marketCap = coin_data['props']['initialProps']['pageProps']['info']['statistics']['marketCap']
+        platforms = coin_data['props']['initialProps']['pageProps']['info']['platforms']
+        eth = list(filter(lambda x: x['contractPlatform'] == 'Ethereum', platforms))
+        if len(eth) == 1:
+            coin.ethTokenAddress = eth[0]['contractAddress']
+        bsc = list(filter(lambda x: x['contractPlatform'] == 'Binance Smart Chain (BEP20)', platforms))
+        if len(bsc) == 1:
+            coin.bscTokenAddress = bsc[0]['contractAddress']
+        coin.website = coin_data['props']['initialProps']['pageProps']['info']['urls']['website'][0]
         coin.save()
     except:
         print('delete coin', coin)
