@@ -1,41 +1,29 @@
 from coin.models import Coin
 from celery import shared_task
-
-
-# @shared_task
-# def add(x, y):
-#     print('add hello!', x, y, x+y)
-#     return x+y
-# @shared_task
-# def test(x, y):
-#     print(x, y)
-#     return x+y
+import json
+import time
 
 from coinFunc import *
 
-
 @shared_task
 def updateMarkCap():
-    URL = 'https://coinmarketcap.com/currencies/'
-    print(URL)
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
-    print('나 보여??')  
+    URL_PREFIX = 'https://coinmarketcap.com/currencies/'
     for coin in Coin.objects.all():
-        time.sleep(1)
         print(coin.name)
-        driver.get(URL+coin.name)
         try:
-            data = int(getFDMC(driver))
-            if data:
-                print(data)
-                coin.marketCap = data
-                coin.save()
+            coin_page = requests.get(URL_PREFIX + coin.name)
+            soup = BeautifulSoup(coin_page.content, 'html.parser')
+            data = soup.find('script', id="__NEXT_DATA__", type="application/json")
+            coin_data = json.loads(data.contents[0])
+
+            coin.marketCap = coin_data['props']['initialProps']['pageProps']['info']['statistics']['marketCap']
+            coin.save()
         except:
             print(coin.name, 'is none')
+            coin.marketCap = 0
+            coin.save()
+
+        time.sleep(5)
 
 @shared_task
 def updateCoin():
