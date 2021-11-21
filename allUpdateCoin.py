@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import time
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "donghadongha.settings")
 import django
@@ -30,6 +31,8 @@ for coin in Coin.objects.all():
             coin.bscTokenAddress = bsc[0]['contractAddress']
         coin.website = coin_data['props']['initialProps']['pageProps']['info']['urls']['website'][0]
         coin.save()
+
+        time.sleep(5)
     except:
         print('delete coin', coin)
         # coin.delete()
