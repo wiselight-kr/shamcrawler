@@ -2,8 +2,8 @@ from coin.models import Coin
 from celery import shared_task
 import json
 import time
-
-from coinFunc import *
+import requests
+from bs4 import BeautifulSoup
 
 @shared_task
 def updateMarkCap():
@@ -27,8 +27,6 @@ def updateMarkCap():
 
 @shared_task
 def updateCoin():
-    from coin.models import Coin
-
     start = 1
     limit = 1000
     API_URL = 'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/listing?start={}&limit={}&sortBy=market_cap&sortType=desc&convert=USD&cryptoType=all&tagType=all&audited=false&aux=null'
@@ -55,31 +53,30 @@ def updateCoin():
 @shared_task
 def allUpdate():
     URL = 'https://coinmarketcap.com/currencies/'
-    print(URL)
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
-    URL = 'https://coinmarketcap.com/currencies/'
 
     for coin in Coin.objects.all():
         if coin.symbol:
             continue
         print(coin)
         try:
-            data = getData(driver, URL + coin.name)
-            if data.get('symbol'):
-                coin.symbol = data['symbol']
-            if data.get('marketCap'):
-                coin.marketCap = data['marketCap']
-            if data.get('etherscan'):
-                coin.ethTokenAddress = data['etherscan']
-            if data.get('bscscan'):
-                coin.bscTokenAddress = data['bscscan']
-            if data.get('site'):
-                coin.website = data['site']
+            coin_page = requests.get(URL + coin.name)
+            soup = BeautifulSoup(coin_page.content, 'html.parser')
+            data = soup.find('script', id="__NEXT_DATA__", type="application/json")
+            coin_data = json.loads(data.contents[0])
+
+            coin.symbol = coin_data['props']['initialProps']['pageProps']['info']['symbol']
+            coin.marketCap = coin_data['props']['initialProps']['pageProps']['info']['statistics']['marketCap']
+            platforms = coin_data['props']['initialProps']['pageProps']['info']['platforms']
+            eth = list(filter(lambda x: x['contractPlatform'] == 'Ethereum', platforms))
+            if len(eth) == 1:
+                coin.ethTokenAddress = eth[0]['contractAddress']
+            bsc = list(filter(lambda x: x['contractPlatform'] == 'Binance Smart Chain (BEP20)', platforms))
+            if len(bsc) == 1:
+                coin.bscTokenAddress = bsc[0]['contractAddress']
+            coin.website = coin_data['props']['initialProps']['pageProps']['info']['urls']['website'][0]
             coin.save()
+
+            time.sleep(5)
         except:
             print('delete coin', coin)
-            #coin.delete()
+            # coin.delete()
