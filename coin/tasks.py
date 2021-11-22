@@ -73,10 +73,13 @@ def allUpdate():
             bsc = list(filter(lambda x: x['contractPlatform'] == 'Binance Smart Chain (BEP20)', platforms))
             if len(bsc) == 1:
                 coin.bscTokenAddress = bsc[0]['contractAddress']
-            coin.website = coin_data['props']['initialProps']['pageProps']['info']['urls']['website'][0]
+            ws = coin_data['props']['initialProps']['pageProps']['info']['urls']['website']
+            if len(ws) == 1:
+                coin.website = ws[0]
             coin.save()
 
-            time.sleep(5)
         except:
             print('delete coin', coin)
             # coin.delete()
+
+        time.sleep(2)
